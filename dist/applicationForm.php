@@ -21,7 +21,7 @@ $conn = OpenCon();
         <meta name="author" content="" />
         <title>LTO - Application Form</title>
         <link href="css/styles.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+       
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -79,7 +79,7 @@ $conn = OpenCon();
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                             <li class="breadcrumb-item active">Application Form</li>
                         </ol>
-                        <form>
+                        <form method ="POST" action = "../SaveRecords/saveDriver.php">
                             <!--start Names-->
                             <div class="container-fluid" style="background-color: rgb(235, 235, 235);">
                                 <label class="large mb-1" for=" ">NAME</label>
@@ -87,19 +87,19 @@ $conn = OpenCon();
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="small mb-1" for="txtL_Name">LAST NAME</label>
-                                            <input class="form-control  " id="txtL_Name" name="txtL_Name" type="text"  />
+                                            <input required class="form-control  " id="txtL_Name" name="txtL_Name" type="text"  />
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="small mb-1" for=" ">FIRST NAME</label>
-                                            <input class="form-control " id="txtF_Name" name="txtF_Name" type="text" />
+                                            <input required class="form-control " id="txtF_Name" name="txtF_Name" type="text" />
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="small mb-1" for=" ">MIDDLE NAME</label>
-                                            <input class="form-control " id="txtM_Name" name="txtM_Name" type="text"  />
+                                            <input required class="form-control " id="txtM_Name" name="txtM_Name" type="text"  />
                                         </div>
                                     </div>
                                 </div>
@@ -176,9 +176,9 @@ $conn = OpenCon();
                                         <div class="form-row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="large mb-1" for="txtPresentAddress">CONTACTS</label> <br>
+                                                    <label class="large mb-1" for=" ">CONTACTS</label> <br>
                                                     <label class="small mb-1" for="txt">TEL NO./ CP NO.</label>
-                                                    <input class="form-control  " id="txtCpNum" name="txtCpNum" type="number" aria-describedby="emailHelp"/>
+                                                    <input required class="form-control  " id="txtCpNum" name="txtCpNum" type="number" aria-describedby="emailHelp"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -201,34 +201,34 @@ $conn = OpenCon();
                                     <!--Nationality-->
                                     <div class="col-md-4">
                                         <label class="small mb-1" for="txtNationality">NATIONALITY</label>
-                                        <input class="form-control " id="txtNationality" name="txtNationality" type="text" aria-describedby="emailHelp"/>
+                                        <input required class="form-control " id="txtNationality" name="txtNationality" type="text" aria-describedby="emailHelp"/>
                                     </div>
                                     <!--end Nationality-->
                                     <!--Gender-->
                                     <div class="col-md-2">
                                         <label class="small mb-1" for="optGender">GENDER</label>
-                                        <select required aria-required="true" class="form-control" name="optGender" id="optGender" onchange="getGender()" >
+                                        <select required aria-required="true" class="form-control" name="optGender" id="optGender" >
                                             <option selected disabled value=""></option>
-                                            <option  value="">Male</option>
-                                            <option  value="">Female</option>
+                                            <option   >Male</option>
+                                            <option  >Female</option>
                                         </select>
                                     </div>
                                     <!--end gender-->
                                     <!--bdate-->
                                     <div class="col-md-4">
                                         <label class="small mb-1" for="txtB_Date">BIRTH DATE</label>
-                                        <input class="form-control " id="txtB_Date" name="txtB_Date" type="date" aria-describedby="emailHelp"/>
+                                        <input required class="form-control " id="B_Date" name="B_Date" type="date" aria-describedby="emailHelp"/>
                                     </div>
                                     <!--end bdate-->
                                     <!--height-->
                                     <div class="col-md-1">
                                         <label class="small mb-1" for="txtHeight">HEIGHT (cm)</label>
-                                        <input class="form-control " id="txtHeight" name="txtHeight" type="number" aria-describedby="emailHelp"/>
+                                        <input required class="form-control " id="txtHeight" name="txtHeight" type="number" aria-describedby="emailHelp"/>
                                     </div>
                                     <!--weight-->
                                     <div class="col-md-1">
                                         <label class="small mb-1" for="txtWeight">WEIGHT (cm)</label>
-                                        <input class="form-control " id="txtWeight" name="txtWeight" type="number" aria-describedby="emailHelp"/>
+                                        <input required class="form-control " id="txtWeight" name="txtWeight" type="number" aria-describedby="emailHelp"/>
                                     </div>
                                 </div>
                                 <br>
@@ -241,25 +241,25 @@ $conn = OpenCon();
                                     <div class="container-fluid" style="background-color: rgb(235, 235, 235);">
                                         <div class="form-group">
                                             <label class="large mb-1" for=" " >DRIVING SKILL LICENSE ACQUIRED OR WILL BE ACQUIRED THRU (DSA)</label> <br>
-                                            <input type="checkbox" id="checkD_School" name="checkD_School" > <label  class="small mb-1" > DRIVING SCHOOL</label> <br>
-                                            <input type="checkbox" id="checkLP_Person" name="checkLP_Person" > <label  class="small mb-2" > LICENSED PRIVATE PERSON</label> <br>
+                                            <label  class="small mb-1" > <input type="checkbox" id="checkD_School" name="checkDSA[]" value = "DS"> DRIVING SCHOOL</label> <br>
+                                            <label  class="small mb-2" > <input type="checkbox" id="checkLP_Person" name="checkDSA[]" value = "LPP"> LICENSED PRIVATE PERSON</label> <br>
                                         </div>
                                     </div>    
                                 </div>
                                 <div class="col-md-4">
                                     <div class="container-fluid" style="background-color: rgb(235, 235, 235);">
-                                        <div class="form-group">
+                                        <div class="form-group form-check">
                                             <label class="large mb-1" for=" " >EDUCATIONAL ATTAINMENT (EA)</label> <br>
-                                                <div class="form-row">
+                                                <div class="form-row ">
                                                     <div class="col-md-6">
-                                                        <input type="radio" id="radioI_Schooling" name="radioI_Schooling" > <label  class="small mb-1" >INFORMAL SCHOOLING</label><br>
-                                                        <input type="radio" id="radioElementary" name="radioElementary" > <label  class="small mb-1" > ELEMENTARY</label> <br>
-                                                        <input type="radio" id="radioH_School" name="radioH_School" > <label  class="small mb-1" > HIGH SCHOOL</label> <br>
+                                                        <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioI_Schooling" name="radioEducation" value = "IinformalSchooling"> INFORMAL SCHOOLING</label><br>
+                                                        <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioElementary" name="radioEducation" value = "Elementary"> ELEMENTARY</label> <br>
+                                                        <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioH_School" name="radioEducation"value = "HighSchool"> HIGH SCHOOL</label> <br>
                                                     </div> 
                                                     <div class="col-md-6">
-                                                        <input type="radio" id="radioVocational" name="radioVocational" > <label  class="small mb-1" > VOCATIONAL</label> <br>
-                                                        <input type="radio" id="radioCollege" name="radioCollege" > <label  class="small mb-1" > COLLEGE</label>  <br>
-                                                        <input type="radio" id="radioP_Graduate" name="radioP_Graduate" > <label  class="small mb-1" >POST GRADUATE</label> <br>      
+                                                        <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioVocational" name="radioEducation"value = "Vocational"> VOCATIONAL</label> <br>
+                                                        <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioCollege" name="radioEducation"value = "College" > COLLEGE</label>  <br>
+                                                        <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioP_Graduate" name="radioEducation" value = "PostGraduate"> POST GRADUATE</label> <br>      
                                                     </div> 
                                                 </div>      
                                         </div>
@@ -269,16 +269,16 @@ $conn = OpenCon();
                                     <div class="container-fluid" style="background-color: rgb(235, 235, 235);">
                                         <div class="form-group">
                                             <label class="large mb-2" for=" ">BLOOD TYPE</label>
-                                            <select required aria-required="true" class="form-control" name="optB_Type" id="optB_Type" onchange="getBlood()" >
+                                            <select required aria-required="true" class="form-control" name="optB_Type" id="optB_Type"   >
                                                 <option selected disabled value=""></option>
-                                                <option  value="">A+</option>
-                                                <option  value="">A-</option>
-                                                <option  value="">B+</option>
-                                                <option  value="">B-</option>
-                                                <option  value="">O+</option>
-                                                <option  value="">O-</option>
-                                                <option  value="">AB+</option>
-                                                <option  value="">AB-</option>
+                                                <option  >A+</option>
+                                                <option  >A-</option>
+                                                <option   >B+</option>
+                                                <option   >B-</option>
+                                                <option   >O+</option>
+                                                <option   >O-</option>
+                                                <option   >AB+</option>
+                                                <option   >AB-</option>
                                             </select>
                                         </div>
                                         <br>
@@ -286,10 +286,10 @@ $conn = OpenCon();
                                 </div>
                                 <div class="col-md-2">
                                     <div class="container-fluid" style="background-color: rgb(235, 235, 235);">
-                                        <div class="form-group">
+                                        <div class="form-check">
                                             <label class="large mb-1" for=" ">ORGAN DONOR</label> <br>
-                                            <input type="radio" id="radioYes" name="radioYes" > <label  class="small mb-2" > YES</label> <br> 
-                                            <input type="radio" id="radioNo" name="radioNo" > <label  class="small mb-4" >NO </label> <br>   
+                                            <label  required class="small mb-2 form-check-label" ><input class="form-check-input" type="radio" id="radioOD_Yes" name="radioOD" value="Yes" > YES</label> <br> 
+                                            <label  required class="small mb-4 form-check-label" ><input class="form-check-input" type="radio" id="radioOD_No" name="radioOD" value = "No"> NO </label> <br>   
                                         </div>
                                     </div>
                                 </div>
@@ -298,50 +298,59 @@ $conn = OpenCon();
                             <div class="form-row">
                                 <div class="col-md-2">
                                     <div class="container-fluid" style="background-color: rgb(235, 235, 235);">
-                                        <label class="large mb-1" for=" ">CIVIL STATUS</label> <br>
-                                        <input type="radio" id="radioSingle" name="radioSingle" > <label  class="small mb-1" > SINGLE</label> <br> 
-                                        <input type="radio" id="radioMarried" name="radioMarried" > <label  class="small mb-1" >MARRIED</label> <br>   
-                                        <input type="radio" id="radioWidow" name="radioWidow" > <label  class="small mb-1" > WIDOW/ER</label> <br> 
-                                        <input type="radio" id="radioSeparated" name="radioSeparated" > <label  class="small mb-1" >SEPARATED </label> <br><br> 
+                                        <div class="form-check">
+                                            <label class="large mb-1" for=" ">CIVIL STATUS</label> <br>
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioSingle" name="radioCS" value = "Single"> SINGLE</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioMarried" name="radioCS" value = "Married"> MARRIED</label> <br>   
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioWidow" name="radioCS" value = "Widow"> WIDOW/ER</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioSeparated" name="radioCS" value = "Separated"> SEPARATED </label> <br><br> 
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="container-fluid" style="background-color: rgb(235, 235, 235);">
-                                        <label class="large mb-1" for=" ">HAIR</label> <br>
-                                        <input type="radio" id="radioH_Black" name="radioH_Black" > <label  class="small mb-1" > BLACK</label> <br> 
-                                        <input type="radio" id="radioH_Brown" name="radioH_Brown" > <label  class="small mb-1" > BROWN</label> <br>   
-                                        <input type="radio" id="radioH_Blonde" name="radioH_Blonde" > <label  class="small mb-1" > BLONDE</label> <br> 
-                                        <input type="radio" id="radioH_Gray" name="radioH_Gray" > <label  class="small mb-1" > GRAY </label> <br> 
-                                        <input type="radio" id="radioH_Others" name="radioH_Others" > <label  class="small mb-1" > others (Specify):  </label>
-                                        <input type="text" name= "txtH_Others" id = "txtH_Others" > <br> 
-                                        
+                                        <div class="form-check">
+                                            <label class="large mb-1" for=" ">HAIR</label> <br>
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioH_Black" name="radioHair" onclick="Color('H')" value = "black">  BLACK</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioH_Brown" name="radioHair" onclick="Color('H')" value = "brown"> BROWN</label> <br>   
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioH_Blonde" name="radioHair"onclick="Color('H')" value = "blonde"> BLONDE</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioH_Gray" name="radioHair" onclick="Color('H')" value = "gray"> GRAY </label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioH_Others" name="radioHair" onclick="Others('H')" value = "others" >  others (Specify):  </label>
+                                            <input type="text" name= "txtH_Others" id = "txtH_Others" placeholder ="Specify if Others" disabled  required> <br> 
+                                        </div>
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-3">
-                                    <div class="container-fluid" style="background-color: rgb(235, 235, 235);">
-                                        <label class="large mb-1" for=" ">EYES</label> <br>
-                                        <input type="radio" id="radioE_Black" name="radioE_Black" > <label  class="small mb-1" > BLACK</label> <br> 
-                                        <input type="radio" id="radioE_Brown" name="radioE_Brown" > <label  class="small mb-1" > BROWN</label> <br>   
-                                        <input type="radio" id="radioE_Gray" name="radioE_Gray" > <label  class="small mb-1" > GRAY </label> <br> 
-                                        <input type="radio" id="radioE_Others" name="radioE_Others" > <label  class="small mb-1" > others (Specify):  </label>
-                                        <input type="text" name= "txtE_Others" id = "txtE_Others" > <br> <br>   
+                                    <div class="container-fluid " style="background-color: rgb(235, 235, 235);">
+                                        <div class="form-check">
+                                            <label class="large mb-1" for=" ">EYES</label> <br>
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioE_Black" name="radioEyes" onclick="Color('E')"value = "black"> BLACK</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioE_Brown" name="radioEyes" onclick="Color('E')"value = "brown"> BROWN</label> <br>   
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioE_Gray" name="radioEyes" onclick="Color('E')"value = "gray"> GRAY </label> <br> 
+                                            <label  class="small mb-2 form-check-label" ><input required class="form-check-input" type="radio" id="radioE_Others" name="radioEyes" onclick="Others('E')" value = "others"> others (Specify):  </label>
+                                            <input type="text" name= "txtE_Others" id = "txtE_Others" placeholder ="Specify if Others" disabled  required> <br> <br>   
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="container-fluid " style="background-color: rgb(235, 235, 235);">
+                                        <div class="form-check">
+                                            <label class="large mb-1" for=" ">BUILT</label> <br>
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioB_Light" name="radioBuilt" value = "light" > LIGHT</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioB_Medium" name="radioBuilt" value = "medium"> MEDUIM</label> <br>   
+                                            <label  class="small mb-2 form-check-label" ><input required class="form-check-input" type="radio" id="radioB_Heavy" name="radioBuilt"value = "heavy" > HEAVY </label><br> <br><br> 
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="container-fluid" style="background-color: rgb(235, 235, 235);">
-                                        <label class="large mb-1" for=" ">BUILT</label> <br>
-                                        <input type="radio" id="radioB_Light" name="radioB_Light" > <label  class="small mb-1" > LIGHT</label> <br> 
-                                        <input type="radio" id="radioB_Medium" name="radioB_Medium" > <label  class="small mb-1" > MEDUIM</label> <br>   
-                                        <input type="radio" id="radioB_Heavy" name="radioB_Heavy" > <label  class="small mb-2" > HEAVY </label><br> <br><br> 
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="container-fluid" style="background-color: rgb(235, 235, 235);">
-                                        <label class="large mb-1" for=" ">COMPLEXION</label> <br>
-                                        <input type="radio" id="radioC_Light" name="radioC_Light" > <label  class="small mb-1" > LIGHT</label> <br> 
-                                        <input type="radio" id="radioC_Fair" name="radioC_Fair" > <label  class="small mb-1" > FAIR</label> <br>   
-                                        <input type="radio" id="radioC_Dark" name="radioC_Dark" > <label  class="small mb-2" > DARK </label><br> <br><br> 
+                                        <div class="form-check">
+                                            <label class="large mb-1" for=" ">COMPLEXION</label> <br>
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioC_Light" name="radioComplexion"value = "light" > LIGHT</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="radio" id="radioC_Fair" name="radioComplexion" value = "medium"> FAIR</label> <br>   
+                                            <label  class="small mb-2 form-check-label" ><input required class="form-check-input" type="radio" id="radioC_Dark" name="radioComplexion" value = "fair"> DARK </label><br> <br><br> 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -503,7 +512,38 @@ $conn = OpenCon();
                                 </div>
                             </div>
 
-                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="login.html">Create Account</a></div>
+                            <div class="form-row">
+                                <div class="col-md-6" >
+                                    <div class="container-fluid" style="background-color: rgb(235, 235, 235);">
+                                        <div class="form-check">
+                                            <label class="large mb-1" for=" ">RESTRICTIONS</label> <br>
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="checkbox" id="RestrictionOne" name="Restriction[]" value = "1" >1. MOTORCYCLE/MOTORIZED TRICYCLES/E-BIKES(LSV) TRIKES(A-1)</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="checkbox" id="RestrictionTwo" name="Restriction[]" value = "2" >2. VEHICLES UP TO 4500 KGS. GVW (MANUAL AND AUTOMATIC CLUTCH)</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="checkbox" id="RestrictionThree" name="Restriction[]" value = "3" >3. VEHICLES ABOVE 4500 KGS. GVW (MANUAL AND AUTOMATIC CLUTCH)</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="checkbox" id="RestrictionFour" name="Restriction[]" value = "4" >4. AUTOMATIC CLUTCH ONLY UP TO 4500 KGS. GVW</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="checkbox" id="RestrictionFive" name="Restriction[]" value = "5" >5. AUTOMATIC CLUTCH ONLY UP ABOVE 4500 KGS. GVW</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="checkbox" id="RestrictionSix" name="Restriction[]"  value = "6">6. ARTICULATED 1600 GVW AND BELOW</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="checkbox" id="RestrictionSeven" name="Restriction[]"  value = "7">7. ARTICULATED 1601 UP TO 4500 GVW</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input required class="form-check-input" type="checkbox" id="RestrictionEight" name="Restriction[]" value = "8">8. ARTICULATED 4501 GVW AND ABOVE (TRUCK - TRAILER)</label> <br> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" >
+                                    <div class="container-fluid" style="background-color: rgb(235, 235, 235);">
+                                        <div class="form-check">
+                                            <label class="large mb-1" for=" ">CONDITIONS</label> <br>
+                                            <label  class="small mb-1 form-check-label" ><input class="form-check-input" type="checkbox" id="Condition_A" name="Condition[]" value = "A">A. WEARING CORRECTIVE LENSES</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input class="form-check-input" type="checkbox" id="Condition_B" name="Condition[]" value = "B">B. DRIVE ONLY WITH CUSTOMIZED VEHICLE</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input class="form-check-input" type="checkbox" id="Condition_C" name="Condition[]" value = "C">C. DRIVE ONLY W/ SPECIAL EQUIPMENT FOR UPPER OR LOWER LIMBS</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input class="form-check-input" type="checkbox" id="Condition_D" name="Condition[]" value = "D">D. DAYLIGHT DRIVING ONLY</label> <br> 
+                                            <label  class="small mb-1 form-check-label" ><input class="form-check-input" type="checkbox" id="Condition_E" name="Condition[]"  value = "E">E. WITH HEARING AID</label> <br> 
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-4 mb-0"> <input type="submit" class="btn btn-primary" name="submit"></div>
                         </form>
                     </div>
                 </main>
@@ -524,10 +564,6 @@ $conn = OpenCon();
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="assets/demo/chart-pie-demo.js"></script>
         
         <!--code for getting addresss-->
         <script>
@@ -673,7 +709,13 @@ $conn = OpenCon();
                 
             }
 
+            function Others(data){
+                document.getElementById("txt"+data+"_Others").disabled = false;
+            }
 
+            function Color(data){
+                document.getElementById("txt"+data+"_Others").disabled = true;
+            }
 
         </script>
     </body>

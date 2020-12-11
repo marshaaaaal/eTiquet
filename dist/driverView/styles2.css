@@ -1,0 +1,14 @@
+    .item{
+	margin-bottom:1em;
+}
+    .item-name{
+	font-weight:600;
+	font-size: 0.9em;
+}
+    .item-description{
+	font-size:0.8em;
+	opacity:0.6;
+}
+    .item p{
+	margin-bottom:0.2em;
+}

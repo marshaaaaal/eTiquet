@@ -60,6 +60,18 @@ $conn = OpenCon();
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Application Form
                             </a>
+                            <a class="nav-link" href="driverTable.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Drivers' List
+                            </a>
+                            <a class="nav-link" href="payQueue.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Payment Queue
+                            </a>
+                            <a class="nav-link" href="violationRec.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Violation Records Queue
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

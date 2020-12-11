@@ -1,16 +1,17 @@
 <?php
 session_start();
-if (!isset($_SESSION['user'])) {
+if(!isset($_SESSION['user'])) {
     $_SESSION['redirect_to'] = $_SERVER['REQUEST_URI'];
     header("location: ../login.php");
 }
-if (strpos($_SESSION['user'], 'O01') !== false) {
+if(strpos($_SESSION['user'], 'O01') !== false){
     header("location: ../officerView/index.php");
-} elseif (strpos($_SESSION['user'], 'S01') !== false) {
+}
+elseif(strpos($_SESSION['user'], 'S01') !== false){
     header("location: ../officeView/index.php");
 }
 
-include('../db_connection.php');
+include ('../db_connection.php');
 
 $conn = OpenCon();
 ?>
@@ -26,158 +27,381 @@ $conn = OpenCon();
     <meta name="author" content="" />
     <title>Driver Interface</title>
     <link href="../css/styles.css" rel="stylesheet" />
-    <link href="../css/styles2.css" rel="stylesheet" />
+    <link href="../driverView/styles2.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script type="text/javascript" src="script.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.php">eTiquet</a>
-        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+    <nav class="sb-topnav navbar navbar-expand" style="background:#164172">
+        <a class="navbar-brand" href="../driverView/index.php">
+			
+			          <img src="../image/eTiquetLogoWhite.png" alt="" style="height:100px;width:auto;margin-left:30px">
+
+			 </a>
+        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars" style="color:white"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-            <div class="input-group">
-
-                <div class="input-group-append">
-
-                </div>
-            </div>
+            
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto ml-md-0">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw" style="color:white"></i></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../logout.php">Logout</a>
+                  
+                    <div class="dropdown-divider" ></div>
+                    <a class="dropdown-item" href="../logout.php" >Logout</a>
                 </div>
             </li>
         </ul>
     </nav>
     <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
+        <div id="layoutSidenav_nav" >
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
 
-                        <a class="nav-link" href="index.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Profile
+                        <a class="nav-link active" href="index.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            Information
                         </a>
-                        <a class="nav-link" href="driverViolations.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            List of Violations
+						
+						<a class="nav-link" href="driverVehicle.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
+                            Vehicle
                         </a>
-                        <a class="nav-link" href="driverVehicle.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Vehicles
+						
+						<a class="nav-link" href="driverViolations.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+                            Violation
                         </a>
+						
+						
                     </div>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    <?php echo $_SESSION['user']; ?>
-                </div>
+                
             </nav>
         </div>
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
+					
+                    
+                        <?php
+
+                    $documentsTable = array();
+                    $licenseNumber = $_SESSION['user'];
+                    $sql = "SELECT * FROM tbl_documents where licenseNumber = '$licenseNumber'";
+                    $result = mysqli_query($conn,$sql) or die($conn->error);
+            
+                        if($result){
+    
+                            while($row = mysqli_fetch_assoc($result)){
+                                    $documentsTable[] = $row;
+                            }
+                                
+                        }
+
+                        
+                    $driversTable = array();
+                    $driverNumber = $documentsTable[0]['licenseNumber'];
+                    $sql = "SELECT * FROM tbl_drivers where licenseNumber  = '$driverNumber'";
+                    $result = mysqli_query($conn,$sql) or die($conn->error);
+            
+                        if($result){
+    
+                            while($row = mysqli_fetch_assoc($result)){
+                                $driversTable[] = $row;
+                                 
+                            }
+                        }
+                        
+                    
+                    ?>
                     <br>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Driver's Profile</li>
+                        <li class="breadcrumb-item active">Driver's Profile / <?php echo $documentsTable[0]['licenseType'];?></li>
                     </ol>
+                    
+                    
+                        
+                </div>
+				
+				<section id="form-layout" class="form-layout">
+					
+      <div class="container">
 
-
-                    <div class="shadow p-3 mb-5 bg-white rounded">
-                        <div class="row">
-                            <?php
-
-                            $documentsTable = array();
-                            $licenseNumber = $_SESSION['user'];
-                            $sql = "SELECT * FROM tbl_documents where licenseNumber = '$licenseNumber'";
-                            $result = mysqli_query($conn, $sql) or die($conn->error);
-
-                            if ($result) {
-
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $documentsTable[] = $row;
-                                }
-                            }
-
-
-                            $driversTable = array();
-                            $driverNumber = $documentsTable[0]['licenseNumber'];
-                            $sql = "SELECT * FROM tbl_drivers where licenseNumber  = '$driverNumber'";
-                            $result = mysqli_query($conn, $sql) or die($conn->error);
-
-                            if ($result) {
-
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $driversTable[] = $row;
-                                }
-                            }
-
-
-
-                            //virtual license needed fields
-                            //echo $driversTable[0]['driverImage']."<br>";
-                            //echo $driversTable[0]['lastName']."<br>";
-                            //echo $driversTable[0]['firstName']."<br>";
-                            //echo $driversTable[0]['middleName']."<br>";
-                            //echo $driversTable[0]['nationality']."<br>";
-                            //echo $driversTable[0]['gender']."<br>";
-                            //echo $driversTable[0]['birthdate']."<br>";
-                            //echo $driversTable[0]['weight']."<br>";
-                            //echo $driversTable[0]['height']."<br>";
-                            //echo $driversTable[0]['address']."<br>";
-                            //echo $documentsTable[0]['licenseNumber']."<br>";
-                            //echo $documentsTable[0]['licenseIssued']."<br>";
-                            // echo $documentsTable[0]['licenseExpiration']."<br>";
-                            //echo $driversTable[0]['bloodType']."<br>";
-                            //echo $driversTable[0]['eyesColor']."<br>";
-                            // echo $documentsTable[0]['restrictions']."<br>";
-                            // echo $documentsTable[0]['driverConditions']."<br><br><br><br><br><br>";
-
-
-
-
-                            //other personal information fields sa lower part na ni kang virtual license
-                            //echo $driversTable[0]['contactNumber']."<br>";
-                            //echo $driversTable[0]['tinNumber']."<br>";
-                            //echo $driversTable[0]['DSA']."<br>";//DRIVING SKILL ACQUIRED
-                            //echo $driversTable[0]['EA']."<br>";//EDUCATION ATTAINMENT
-                            //echo $driversTable[0]['organDonor']."<br>";
-                            //echo $driversTable[0]['civilStatus']."<br>";
-                            //echo $driversTable[0]['hairColor']."<br>";
-                            //echo $driversTable[0]['bodyBuilt']."<br>";
-                            //echo $driversTable[0]['complexion']."<br>";
-                            //echo $driversTable[0]['birthplace']."<br>";
-                            //echo $driversTable[0]['fatherName']."<br>";
-                            //echo $driversTable[0]['spouseName']."<br>";
-                            //echo $driversTable[0]['employerName']."<br>";
-                            //echo $driversTable[0]['employerNumber']."<br>";
-                            // echo $driversTable[0]['employerAddress']."<br>";
-
-                            //ORC FILE
-                            //echo $documentsTable[0]['orc']."<br>";
-
-                            ?>
-                            <div class="col-5 col-md-3">
-                                <div class="form row">
-                                    <div class="col-md-12 mb-4">
-                                        <center> <img src=<?php echo "'" . $driversTable[0]['driverImage'] . "'"; ?> style="width:70%" height=auto></center>
-                                    </div>
-                                    <div class=" container-fluid col-md-12">
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#generateQR" style="width:100%" onclick="makeCode()">
+        <div class="row">
+          <div class="col-xl-2 col-lg-3" data-aos="fade-up">
+            <div class="content">
+      	<img src=<?php echo "\"".$driversTable[0]['driverImage']."\"";?> style="width:100%" height=auto>
+				
+				
+            </div>
+			
+			  <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary btn-more" data-toggle="modal" data-target="#generateQR" style="width:100%" onclick="makeCode()">
                                             Generate QR CODE
                                         </button>
+			  
+          </div>
+			
+          <div class="col-xl-10 col-lg-9 d-flex">
+            <div class="icon-boxes d-flex flex-column">
+              <div class="row">
+                <div class="col-xl-12 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                  <div class="icon-box mt-4 mt-xl-0">
+					  <div class="resume">
+							<div class="row">
+          <div class="col-lg-6">
+            <h3 class="resume-title"></h3>
+            <div class="resume-item pb-0">
+              <h4><?php echo $driversTable[0]['lastName'];?>, <?php echo $driversTable[0]['firstName'];?> <?php echo $driversTable[0]['middleName'];?></h4>
+              <p><em>Last Name, First Name Middle Name</em></p>
+				
+				<h5><?php echo $driversTable[0]['nationality'];?></h5><p><em>Nationality</em></p>
+				
+				<h5><?php echo $driversTable[0]['gender'];?></h5>
+				<p><em>Sex</em></p>
+				
+				<h5><?php echo $driversTable[0]['birthDate'];?></h5>
+				<p><em>Date of Birth</em></p>
+				
+				<h5><?php echo $driversTable[0]['height'];?></h5>
+				<p><em>Height (m)</em></p>
+				
+				<h5><?php echo $driversTable[0]['weight'];?></h5>
+				<p><em>Weight (kg) </em></p>
+				
+				<h5><?php echo $driversTable[0]['bloodType'];?></h5>
+				<p><em>Blood Type</em></p>
+				
+				<h5><?php echo $driversTable[0]['eyesColor'];?></h5>
+				<p><em>Eye Color</em></p>
+				
+				
+            </div>
+            
+          </div>
+          <div class="col-lg-6">
+            <h3 class="resume-title"></h3>
+            <div class="resume-item">
+              <h4><?php echo $documentsTable[0]['licenseNumber'];?></h4>
+			<p><em>License Number</em></p>
+				<input hidden id ="licenseNum" value=<?php echo $documentsTable[0]['licenseNumber'];?>>
 
-                                        <!-- Modal -->
+              <h5><?php echo $documentsTable[0]['licenseExpiration'];?></h5>
+              <p><em>Expiration Date </em></p>
+				
+				<h5><?php echo $documentsTable[0]['licenseType'];?></h5>
+              <p><em>Type of Licence</em></p>
+				
+				<h5><?php echo $documentsTable[0]['restrictions'];?></h5>
+              <p><em>Restriction </em></p>
+				
+				<h5><?php echo $documentsTable[0]['driverCondition'];?></h5>
+              <p><em>Condition</em></p>
+				
+            </div>
+			  <div class="resume-item">
+              <h4><?php echo $driversTable[0]['spouseName']; ?></h4>
+			<p><em>In case of Emergency</em></p>
+
+              <h5><?php echo $driversTable[0]['spouseContact']; ?></h5>
+              <p><em>Contact Number </em></p>
+			
+              
+            </div>
+            
+          </div>
+        </div>
+						  <div class="row">
+          <div class="col-lg-12">
+            <h3 class="resume-title"></h3>
+            <div class="resume-item pb-0">
+              <h4><?php echo $driversTable[0]['address'];?></h4>
+              <p><em>Address</em></p>
+							
+            </div>
+            
+          </div>
+							
+        </div>
+						  
+                  </div>
+					  </div>
+					
+                </div>
+                
+               
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+					
+    </section>
+<div class="container"> 				
+<button type="button" class="btn btn-more btn-lg btn-block" data-toggle="modal" data-target="#moreInformation">
+  More information</button>
+							  
+				</div>			  <!-- Modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="moreInformation">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><?php echo $documentsTable[0]['licenseNumber'];?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+					  <div class="resume">
+							<div class="row">
+          <div class="col-lg-6">
+            <h3 class="resume-title"></h3>
+            <div class="resume-item pb-0">
+              <h4>Basic Information</h4>
+				
+				<h5><?php echo $driversTable[0]['contactNumber'];?></h5><p><em>Tel no./Cp No.</em></p>
+				
+				<h5><?php echo $driversTable[0]['tinNumber'];?></h5>
+				<p><em>Tin</em></p>
+				
+				<h5><?php echo $driversTable[0]['civilStatus'];?></h5>
+				<p><em>Civil Status</em></p>
+				
+				<h5><?php echo $driversTable[0]['EA'];?></h5>
+				<p><em>Educational Attainement</em></p>
+				
+				<h5><?php echo $driversTable[0]['birthPlace'];?></h5>
+				<p><em>Birth Place </em></p>
+				
+				<h5><?php echo $driversTable[0]['DSA'];?></h5>
+				<p><em>Driving Skill Acquired</em></p>
+			
+            </div>
+            
+          </div>
+          <div class="col-lg-6">
+            <h3 class="resume-title"></h3>
+            <div class="resume-item">
+              <h4>Physique</h4>
+
+              <h5><?php echo $driversTable[0]['hairColor'];?></h5>
+              <p><em>Hair </em></p>
+				
+				<h5><?php echo $driversTable[0]['eyesColor'];?></h5>
+              <p><em>Eyes</em></p>
+				
+				<h5><?php echo $driversTable[0]['bodyBuilt'];?></h5>
+              <p><em>Built </em></p>
+				
+				<h5><?php echo $driversTable[0]['complexion'];?></h5>
+              <p><em>Complexion</em></p>
+				
+				<h5><?php echo $driversTable[0]['bloodType'];?></h5>
+              <p><em>Blood Type</em></p>
+				
+				<h5><?php echo $driversTable[0]['organDonor'];?></h5>
+              <p><em>Organ Donor</em></p>
+				
+            </div>
+            
+          </div>
+        </div>
+						  <div class="row">
+          <div class="col-lg-6">
+            <h3 class="resume-title"></h3>
+            <div class="resume-item">
+              <h4>Parent's Information</h4>
+						
+				<h5><?php echo $driversTable[0]['fatherName'];?></h5>
+              <p><em>Father's Name</em></p>
+				
+				<h5><?php echo $driversTable[0]['motherName'];?></h5>
+              <p><em>Mother's Name</em></p>
+				
+            </div>
+			  
+			  <div class="resume-item">
+              <h4>Spouse's Information</h4>
+						
+				<h5><?php echo $driversTable[0]['spouseName'];?></h5>
+              <p><em>Spouse's Name</em></p>
+			
+				
+            </div>
+            
+          </div>
+			<div class="col-lg-6">
+            <h3 class="resume-title"></h3>
+            <div class="resume-item">
+              <h4>Employer's Information</h4>
+						
+				<h5><?php echo $driversTable[0]['employerName'];?></h5>
+              <p><em>Employer's Name</em></p>
+				
+				<h5><?php echo $driversTable[0]['employerNumber'];?></h5>
+              <p><em>Contact Number</em></p>
+				
+				<h5><?php echo $driversTable[0]['employerAddress'];?></h5>
+              <p><em>Business Address</em></p>
+				
+            </div>
+			  
+			 
+          </div>
+							
+        </div>
+						  <div class="row">
+          <div class="col-lg-12">
+            <h3 class="resume-title"></h3>
+            <div class="resume-item">
+              <h4>License Information</h4>
+						
+				<h5><?php echo $documentsTable[0]['status'];?></h5>
+              <p><em>Status</em></p>
+				
+				<h5><?php echo $documentsTable[0]['licenseIssued'];?></h5>
+              <p><em>Issued Date</em></p>
+				
+				<h5><?php echo $documentsTable[0]['licenseExpiration'];?></h5>
+              <p><em>Expiration Date</em></p>
+				
+				
+				
+            </div>
+			  
+			  
+            
+          </div>
+							 
+					
+        </div>
+						  
+				
+                                    
+                                    
+                                    
+                                
+						  
+                  </div>
+					 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+				<!-- Modal -->
                                         <div class="modal fade" id="generateQR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -191,7 +415,7 @@ $conn = OpenCon();
                                                             <div class="item">
                                                                 <center>
                                                                     <p class="item-name">Kindly save this QR Code</p><br>
-                                                                    <div id="qrCode">
+                                                          <div id="qrCode">
 
                                                                     </div>
                                                                 </center>
@@ -212,283 +436,10 @@ $conn = OpenCon();
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-13 col-md-9">
-                                <form>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="item">
-                                                <p class="item-name"><?php echo $driversTable[0]['lastName']; ?></p>
-                                                <p class="item-description">Last Name</p>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="item">
-                                                <p class="item-name"><?php echo $driversTable[0]['firstName']; ?></p>
-                                                <p class="item-description">First Name</p>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="item">
-                                                <p class="item-name"><?php echo $driversTable[0]['middleName']; ?></p>
-                                                <p class="item-description">Middle Name</p>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="item">
-                                                <p class="item-name"><?php echo $documentsTable[0]['licenseNumber']; ?></p>
-                                                <input hidden id="licenseNum" value=<?php echo $documentsTable[0]['licenseNumber']; ?>>
-                                                <p class="item-description">License Number</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <form>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="item">
-                                                <p class="item-name"><?php echo $driversTable[0]['nationality']; ?></p>
-                                                <p class="item-description">Nationality</p>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="item">
-                                                <p class="item-name"><?php echo $driversTable[0]['gender']; ?></p>
-                                                <p class="item-description">Gender</p>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="item">
-                                                <p class="item-name"><?php echo $driversTable[0]['birthDate']; ?></p>
-                                                <p class="item-description">Date of Birth</p>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="item">
-                                                <p class="item-name"><?php echo $driversTable[0]['contactNumber']; ?></p>
-                                                <p class="item-description">Tel No. / CP No.</p>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="item">
-                                                <p class="item-name"><?php echo $driversTable[0]['tinNumber']; ?></p>
-                                                <p class="item-description">TIN </p>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="item">
-                                                <p class="item-name"><?php echo $driversTable[0]['birthPlace']; ?></p>
-                                                <p class="item-description">Place of Birth </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <form>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="item">
-                                                <p class="item-name"><?php echo $driversTable[0]['address']; ?></p>
-                                                <p class="item-description">Present Address</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <form>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['height']; ?> cm</p>
-                                        <p class="item-description">Height</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['weight']; ?> kg</p>
-                                        <p class="item-description">Weight</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['bloodType']; ?></p>
-                                        <p class="item-description">Blood type</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['civilStatus']; ?></p>
-                                        <p class="item-description">Civil Status</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['EA']; ?></p>
-                                        <p class="item-description">Educational Attainment</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
-                        <form>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['organDonor']; ?></p>
-                                        <p class="item-description">Organ Donor</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['DSA']; ?></p>
-                                        <p class="item-description">Driving Skill Acquired</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['hairColor']; ?></p>
-                                        <p class="item-description">Hair </p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['eyesColor']; ?></p>
-                                        <p class="item-description">Eyes</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['bodyBuilt']; ?></p>
-                                        <p class="item-description">Built</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['complexion']; ?></p>
-                                        <p class="item-description">Complexion</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <hr>
-                        <form>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['fatherName']; ?></p>
-                                        <p class="item-description">Father's Name</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['motherName']; ?></p>
-                                        <p class="item-description">Mother's Name</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['spouseName']; ?></p>
-                                        <p class="item-description">Spouse's Name</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <form>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['employerName']; ?></p>
-                                        <p class="item-description">Employer's Business Name</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['employerNumber']; ?></p>
-                                        <p class="item-description">Contact Number</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $driversTable[0]['employerAddress']; ?></p>
-                                        <p class="item-description">Employer's Business Address</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <hr>
-                        <h3>License Information</h3>
-                        <br>
-                        <form>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $documentsTable[0]['status']; ?></p>
-                                        <p class="item-description">License Status</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $documentsTable[0]['licenseType']; ?></p>
-                                        <p class="item-description">Type of License</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $documentsTable[0]['restrictions']; ?></p>
-                                        <p class="item-description">Restriction</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $documentsTable[0]['licenseIssued']; ?></p>
-                                        <p class="item-description">IssuedDate</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name"><?php echo $documentsTable[0]['licenseExpiration']; ?></p>
-                                        <p class="item-description">ExpirationDate</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <form>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name">Official Receipt</p>
-                                        <img src="/LTO/try.png" alt="..." class="img-thumbnail" style="height:227px;width:227px">
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item">
-                                        <p class="item-name">Certificate of Registration</p>
-                                        <img src="/LTO/try.png" alt="..." class="img-thumbnail" style="height:227px;width:227px">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+				
+				
             </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2020</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            
         </div>
     </div>
 
@@ -502,8 +453,8 @@ $conn = OpenCon();
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
     <script type="text/javascript">
         var qrcode = new QRCode('qrCode');
-
-        function makeCode() {
+        makeCode();
+        function makeCode(){
             var input = document.getElementById('licenseNum');
             qrcode.makeCode(input.value);
         }

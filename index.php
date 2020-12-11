@@ -1,326 +1,311 @@
-<?php
-session_start();
-if(isset($_SESSION['user'])){
-    if(strpos($_SESSION['user'], 'E01') !== false){
-        header("location: dist/driverView/index.php");
-    }
-    elseif(strpos($_SESSION['user'], 'S01') !== false){
-        header("location: dist/officeView/applicationForm.php");
-    }
-    elseif(strpos($_SESSION['user'], 'O01') !== false){
-        header("location: dist/officerView/index.php");
-    }
-    
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>eTiquet - Home</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
-        <!-- Third party plugin CSS-->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>eTiquet</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../eTiquet/assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Flexor - v2.4.0
+  * Template URL: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+ 
+  
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="container d-flex">
+
+      <div class="logo mr-auto">
         
-      <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+        <!-- Uncomment below if you prefer to use an image logo -->
+         <a href="index.php"><img src="assets/img/eTiquetLogoWhite.png" alt="" style="height:200px;width:auto"></a>
+      </div>
 
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top" style="margin: 0px;"><img src="image/eTiquetLogo2.png" width="20%"></a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Masthead-->
-        <div>
-        <div class="overlay">
-                        <img class="overlay-img" src="image/cover.jpg">
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="index.html">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
 
-        </div>
-            <img class="overlay-logo" src="image/logo.png">
-        </div>
-        <div class="masthead">
-            <div class="masthead-bg"></div>
-            <div class="container h-100">
-                <div class="row h-100">
-                    <div class="col-12 my-auto">
-                        <div class="masthead-content text-white py-5 py-md-0">
-                            <h1 class="mb-3" style="font-family: 'Concert One', cursive;">eTiquet</h1>
-                            <p class="mb-5 text-justify" style="font-family: poppins">An online web application that allows the <strong> Land Transportation Office </strong> to check driver's license, anytime and anywhere, without hassle. </p>
-                            <div class="input-group input-group-newsletter">    
-                                <a href="dist/login.php"><button type="button" class="btn btn-primary">Log In</button></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="social-icons">
-            <ul class="list-unstyled text-center mb-0">
-                <li class="list-unstyled-item">
-                    <a href="#">
-                       <i class="far fa-envelope"></i>
-                    </a>
-                </li>
-                <li class="list-unstyled-item">
-                    <a href="#">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        
-        <!-- About-->
-        <section class="page-section bg-primary" id="about">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8 text-center">
-                        <h2 class="text-white mt-0">About</h2>
-                        <hr class="divider light my-4" />
-                        <p class="text-white-50 mb-4" >An electronic Ticket (eTiquet) is a web application that allows drivers to store their personal information in a QR Code for verification during checkpoints. It is a handy and convenient alternative for a physical driver's license because you can bring it anywhere with the comfort that the holder's personal data are safe. The electronic ticket permits any driver the right to drive any vehicle in accordance with the restrictions stated in their profile. One tap and scan, and the ticketing officers can verify the driver's license authenticity and check the profile of the riders and as well as in giving violations intended for the drivers.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Services-->
-        <section class="page-section" id="services">
-            <div class="container">
-                <h2 class="text-center mt-0" style="font-family: 'Concert One', cursive;">At Your Service</h2>
-                <hr class="divider my-4" />
-                <h3 class="text-center mt-0" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Here's how eTiquet make you checkpoint very short...</h3>
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="card" style="width:300px">
-  <img class="card-img-top" src="" alt="Card image">
-  <div class="card-body">
-    <h3 class="card-title">Click</h3>
-    <p class="card-text">Some example text.</p>
-  </div>
-</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="card" style="width:300px">
-  <img class="card-img-top" src="" alt="Card image">
-  <div class="card-body">
-    <h3 class="card-title">Scan</h3>
-    <p class="card-text">Some example text.</p>
-  </div>
-</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="card" style="width:300px">
-  <img class="card-img-top" src="" alt="Card image">
-  <div class="card-body">
-    <h3 class="card-title">Verify</h3>
-    <p class="card-text">Some example text.</p>
-  </div>
-</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="card" style="width:300px">
-  <img class="card-img-top" src="" alt="Card image">
-  <div class="card-body">
-    <h3 class="card-title">Drive</h3>
-    <p class="card-text">Some example text.</p>
-  </div>
-</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Call to action-->
-        <section class="page-section bg-dark">
-          <div class="container">
-                <h2 class="text-center mt-0 text-white" style="font-family: 'Concert One', cursive;">Service for Officer</h2>
-                <hr class="divider my-4" />
-                <h3 class="text-center mt-0 text-white" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Here's how eTiquet make you checkpoint very short...</h3>
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="card" style="width:300px">
-  <img class="card-img-top"  src="image/Scan.PNG" alt="Card image">
-  <div class="card-body">
-    <h3 class="card-title ">Scan</h3>
-    <p class="card-text">Scan your QR Code.</p>
-  </div>
-</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="card" style="width:300px">
-  <img class="card-img-top" src="image/Verify.PNG" alt="Card image">
-  <div class="card-body">
-    <h3 class="card-title">Verify</h3>
-    <p class="card-text">Verify if it's not fake.</p>
-  </div>
-</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="card" style="width:300px">
-  <img class="card-img-top" src="image/Submit.PNG" alt="Card image">
-  <div class="card-body">
-    <h3 class="card-title">Submit</h3>
-    <p class="card-text">Submit the Violations.</p>
-  </div>
-</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="card" style="width:300px">
-  <img class="card-img-top" src="image/Done.PNG" alt="Card image">
-  <div class="card-body">
-    <h3 class="card-title">Done</h3>
-    <p class="card-text">Good Job.</p>
-  </div>
-</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Contact-->
-        <section class="page-section" id="contact">
-            <div class="container">
-<!--Section: Contact v.2-->
-<section class="mb-4">
-
-    <!--Section heading-->
-    <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
-    <!--Section description-->
-    <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
-        a matter of hours to help you.</p>
-
-    <div class="row">
-
-        <!--Grid column-->
-        <div class="col-md-9 mb-md-0 mb-5">
-            <form id="contact-form" name="contact-form" action="mail.php" method="POST">
-
-                <!--Grid row-->
-                <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <input type="text" id="name" name="name" class="form-control" placeholder="Your name">
-                        </div>
-                    </div>
-                    <!--Grid column-->
-<br>
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <input type="text" id="email" name="email" class="form-control" placeholder="Your email">
-                        </div>
-                    </div>
-                    <!--Grid column-->
-
-                </div>
-                <!--Grid row-->
-<br>
-                <!--Grid row-->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="md-form mb-0">
-                            <input type="text" id="subject" name="subject" class="form-control" placeholder="Subject">
-                        </div>
-                    </div>
-                </div>
-                <!--Grid row-->
-
-                <!--Grid row-->
-                <br>
-                <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-md-12">
-
-                        <div class="md-form">
-                            <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea" placeholder="Your message"></textarea>
-                            </div>
-
-                    </div>
-                </div>
-                <!--Grid row-->
-
-            </form>
-<br>
-            <div class="text-center text-md-left">
-                <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
-            </div>
-            <div class="status"></div>
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-md-3 text-center">
-            <ul class="list-unstyled mb-0">
-                <li><i class="fas fa-map-marker-alt fa-2x"></i>
-                    <p>NAGA CITY</p>
-                </li>
-
-                <li><i class="fas fa-phone mt-4 fa-2x"></i>
-                    <p>+ 639000000</p>
-                </li>
-
-                <li><i class="fas fa-envelope mt-4 fa-2x"></i>
-                    <p>LTO@gmail.com</p>
-                </li>
-            </ul>
-        </div>
-        <!--Grid column-->
+        </ul>
+      </nav><!-- .nav-menu -->
 
     </div>
+  </header><!-- End Header -->
 
-</section>
-<!--Section: Contact v.2-->                    
-                
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+    <div class="container" data-aos="fade-in">
+      <h1>Welcome to eTiquet</h1>
+      <div class="d-flex align-items-center">
+        <i class="bx bxs-right-arrow-alt get-started-icon"></i>
+        <a href="../eTiquet/dist/login.php" class="btn-get-started scrollto">Login</a>
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-xl-4 col-lg-5" data-aos="fade-up">
+            <div class="content">
+              <h3><i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                   An online web application that allows the <strong> Land Transportation Office </strong> to check driver's license, anytime and anywhere, without hassle.   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </h3>
+              <div class="text-center">
+                <a href="#about" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+              </div>
             </div>
-        </section>
-      
-        <!-- Bootstrap core JS-->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Third party plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+          </div>
+          <div class="col-xl-8 col-lg-7 d-flex">
+            <div class="icon-boxes d-flex flex-column justify-content-center">
+              <div class="row">
+                <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                  <div class="icon-box mt-4 mt-xl-0">
+					                      <i class="bx bx-fingerprint"></i>
+
+					  <h4>Tap</h4>
+                    <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                  </div>
+                </div>
+                <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-scan"></i>
+                    <h4>Scan</h4>
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                  </div>
+                </div>
+                <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-check-double"></i>
+                    <h4>Verify	</h4>
+                    <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about section-bg">
+      <div class="container">
+
+        <div class="row">
+          
+
+          <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
+            <h4 data-aos="fade-up">About us</h4>
+            <h3 data-aos="fade-up">An electronic Ticket (eTiquet)  is a web application that allows drivers to store their personal information in a QR Code for verification during checkpoints.</h3>
+            <p data-aos="fade-up">It is a handy and convenient alternative for a physical driver's license because you can bring it anywhere with the comfort that the holder's personal data are safe. The electronic ticket permits any driver the right to drive any vehicle in accordance with the restrictions stated in their profile. One tap and scan, and the ticketing officers can verify the driver's license authenticity and check the profile of the riders and as well as in giving violations intended for the drivers.</p>
+
+            
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Services</h2>
+          <p>Here's how eTiquet make you checkpoint very short...</p>
+        </div>
+<h2 data-aos="fade-up">Checkpoint Officer</h2>
+		  <br>
+        <div class="row">
+			
+          <div class="col-lg-4 col-md-6" data-aos="fade-up">
+            <div class="icon-box">
+              <div class="icon"><i class="icofont-qr-code"></i></div>
+              <h4 class="title"><a href="">Scan QR Code</a></h4>
+              <img src="image/1.png" style="width:100%;height:auto">
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="icofont-check-circled"></i></div>
+              <h4 class="title"><a href="">Verify</a></h4>
+                            <img src="image/2.png" style="width:100%;height:auto">
+
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+				
+              <div class="icon"><i class="icofont-ticket"></i></div>
+              <h4 class="title"><a href="">Submit</a></h4>
+                   <p><img src="image/3.png" style="width:100%;height:auto"></p>
+
+            </div>
+          </div>
+         
+         
+          
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+     
+<!-- ======= Services Section ======= -->
+   
+
+     
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact section-bg">
+      <div class="container">
+
+        <div class="section-title">
+          <h2 data-aos="fade-up">Contact</h2>
+          <p data-aos="fade-up">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+        a matter of hours to help you</p>
+        </div>
+
+        <div class="row justify-content-center">
+
+          <div class="col-xl-3 col-lg-4 mt-4" data-aos="fade-up">
+            <div class="info-box">
+              <i class="bx bx-map"></i>
+              <h3>Our Address</h3>
+              <p>Naga City</p><br><p>Camarines Sur</p>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 mt-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="info-box">
+              <i class="bx bx-envelope"></i>
+              <h3>Email Us</h3>
+              <p>squad.com<br>squad@gmail.com</p>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 mt-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="info-box">
+              <i class="bx bx-phone-call"></i>
+              <h3>Call Us</h3>
+              <p>0926 665 9014<br>0999 999 9999</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="300">
+          <div class="col-xl-9 col-lg-12 mt-4">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <div class="form-row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                  <div class="validate"></div>
+                </div>
+                <div class="col-md-6 form-group">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                  <div class="validate"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                <div class="validate"></div>
+              </div>
+              <div class="mb-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+   
+	  
+
+    <div class="container d-lg-flex py-4">
+
+      <div class="mr-lg-auto text-center text-lg-left">
+        
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/ -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+      <div class="social-links text-center text-lg-right pt-3 pt-lg-0">
+        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/jquery-sticky/jquery.sticky.js"></script>
+  <script src="assets/vendor/venobox/venobox.min.js"></script>
+  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
 </html>

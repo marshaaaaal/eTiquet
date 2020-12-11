@@ -29,35 +29,48 @@ $conn = OpenCon();
     <meta name="author" content="" />
     <title>Scanner </title>
     <link href="../css/styles.css" rel="stylesheet" />
+	<link href="../driverView/styles2.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+	
+	<style>
+	.no-outline {
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+}
+
+.no-outline:focus {
+  outline: none;
+}
+
+	</style>
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.php">eTiquet</a>
-        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-            <div class="input-group">
-
-                <div class="input-group-append">
-
+    <nav class="sb-topnav navbar navbar-expand" style="background:#164172" >
+            <a class="navbar-brand" href="../officeView/index.php">
+				<img src="../image/eTiquetLogoWhite.png" alt="" style="height:100px;width:auto;margin-left:30px"></a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars" style="color:white"></i></button>
+           <!-- Navbar Search-->
+           <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                <div class="input-group">
+                     
                 </div>
-            </div>
-        </form>
-        <!-- Navbar-->
-        <ul class="navbar-nav ml-auto ml-md-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../logout.php">Logout</a>
-                </div>
-            </li>
-        </ul>
-    </nav>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ml-auto ml-md-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw" style="color:white	"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                      
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="../logout.php">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -65,13 +78,13 @@ $conn = OpenCon();
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
                         <a class="nav-link" href="index.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Scanner
-                        </a>
-                        <a class="nav-link" href="record.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Records
-                        </a>
+                                <div class="sb-nav-link-icon"><i class="fas fa-qrcode"></i></div>
+                                Scanner
+                            </a>
+                            <a class="nav-link" href="record.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+                                Records
+                            </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -86,10 +99,10 @@ $conn = OpenCon();
             <main>
                 <form id="noLicenseTicketForm" method="post" action="saveNodriverLicense.php">
                     <div class="container-fluid">
-                        <div id="box1">
-                            <div class="container-fluid" style="margin-top:3%; margin-left:20%; width: 60%; background-color:rgb(235, 235, 235)" height="auto">
-                                <h3>Apprehension Report</h3>
-                                <div class="form-row">
+						<br>
+						<div class="shadow p-3 mb-5 bg-white rounded">
+							<h3>Apprehension Report</h3>
+							<div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="small mb-1" for=" "><b>Name </b> (Last Name, First Name, Middile Name)</label>
@@ -122,11 +135,11 @@ $conn = OpenCon();
                                     </div>
 
                                 </div>
-                                <br>
+							<br>
                                 <h3>List of Violations</h3>
                                 <div class="form-row">
                                     <div class="col-md-6">
-                                        <b>I. LTO Violations fee relative to Licensing </b>
+                                        <br><b>I. LTO Violations fee relative to Licensing </b>
                                         <div class="form-check"><br>
                                             <label class="small mb-1"> <input type="checkbox" id="violation1_1" name="violation1[]" value="LV1-001-01" checked onclick="return false;"> Driving without license in the Philippines</label> <br>
                                             <label class="small mb-1"> <input type="checkbox" id="violation1_2" name="violation1[]" value="LV1-002-01"> LTO penalty for not wearing seatbelt in the Philippines</label> <br>
@@ -136,7 +149,7 @@ $conn = OpenCon();
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <b>II. LTO Fines and Penalties connected with car registration/renewal </b>
+                                        <br><b>II. LTO Fines and Penalties connected with car registration/renewal </b>
                                         <div class="form-check"><br>
                                             <label class="small mb-1"> <input type="checkbox" id="violation2_1" name="violation2[]" value="LV2-001-01"> Driving without valid vehicle registration</label> <br>
                                             <label class="small mb-1"> <input type="checkbox" id="violation2_2" name="violation2[]" value="LV2-002-01"> Driving an illegally modified car </label> <br>
@@ -144,7 +157,7 @@ $conn = OpenCon();
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <b>III. LTO Fines and Penalties cin connection with vehicles accessories, equipment, parts</b>
+                                        <br><b>III. LTO Fines and Penalties cin connection with vehicles accessories, equipment, parts</b>
                                         <div class="form-check"><br>
                                             <label class="small mb-1"> <input type="checkbox" id="violation3_1" name="violation3[]" value="LV3-001-01"> Driving a car without proper/authorized devices, equipment, accessories or car part</label> <br>
                                             <label class="small mb-1"> <input type="checkbox" id="violation3_2" name="violation3[]" value="LV3-002-02"> Operating a car with an improper attachment/unauthorized of motor vehicle license plate </label> <br>
@@ -153,23 +166,29 @@ $conn = OpenCon();
                                         </div>
                                     </div>
                                 </div>
-                                <br>
+							<br>
+							<hr>
                                 <div class="form-group form row mt-4 mb-0">
                                     <div class="col-md-6">
-                                        <button type="button" class="btn btn-primary" id="btnVehicle" data-toggle="modal" data-target="#vehicleScan" style="width:100%">Vehicle</button>
+										<br>
+                                        <button type="button" class="btn btn-primary btn-more" id="btnVehicle" data-toggle="modal" data-target="#vehicleScan" style="width:100%">Vehicle</button>
                                     </div>
+									
                                     <div class="col-md-6">
-                                        <button disabled id="btnSubmit" type="button" class="btn btn-primary" style="width:100%" placeholder="Kindly enter a vehicle information" onclick="submitTicket()">Submit</button>
+										<br>
+                                        <button disabled id="btnSubmit" type="button" class="btn btn-secondary btn-more" style="width:100%" placeholder="Kindly enter a vehicle information" onclick="submitTicket()">Submit</button>
                                     </div>
                                 </div>
-                            </div>
+						</div>	
+                        <div id="box1">
+                            
 
                             <!--vehicle scan modals-->
                             <div class="modal fade" id="vehicleScan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="VScanTitle">Scan Vehicle</h5>
+                                            <h5 class="modal-title" id="VScanTitle">Vehicle Information</h5>
 
                                         </div>
                                         <div class="modal-body">
@@ -178,10 +197,10 @@ $conn = OpenCon();
                                                     <div id="vChoose" style="margin-top:3%; display:block">
                                                         <div class="form row">
                                                             <div class="col-md-6">
-                                                                <button id="" type="button" class="btn btn-primary" style="display:block" onclick="scanVehicle()">Scan Vehicle QR Code</button>
+                                                                <button id="" type="button" class="btn btn-primary btn-more" style="display:block" onclick="scanVehicle()">Scan Vehicle QR Code</button>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <button id="" type="button" class="btn btn-primary" style="display:block" onclick="btnManualInputForm()">Manually Input Plate Number</button>
+                                                                <button id="" type="button" class="btn btn-primary btn-more" style="display:block" onclick="btnManualInputForm()">Manually Input Plate No.</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -195,26 +214,44 @@ $conn = OpenCon();
                                                 <!--for scanning vehicle-->
                                                 <div id="orcr" style="display:none">
                                                     <div class="container-fluid form row">
-                                                        <div class="col-md-6">
-                                                            <label class="small mb-1" id="" for="pNumber">Plate number: </label>
-                                                            <b><input readonly class="form control small mb-1" type="text" id="pNumber" name="pNumber"></b>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label class="small mb-1" id="" for="fNumber">File number: </label>
-                                                            <b><input readonly class="form control small mb-1" type="text" id="fNumber"></b>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                        <label class="small mb-1" id="" for="eNumber">Engine number: </label>
-                                                            <b><input readonly class="form control small mb-1" type="text" id="eNumber"></b>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label class="small mb-1" id="" for="pNumber">Chassis number: </label>
-                                                            <b><input readonly class="form control small mb-1" type="text" id="cNumber"></b>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <label class="small mb-1" id="" for="rOwner">Registered owner: </label>
-                                                            <b><input readonly class="form control small mb-1" type="text" id="rOwner"></b>
-                                                        </div>
+														<div class="resume">
+							<div class="row">
+          <div class="col-lg-12">
+            <h3 class="resume-title">
+
+				<input readonly class="form control small mb-1 no-outline" type="text" id="rOwner"></h3>
+            <div class="resume-item pb-0">
+              
+				
+				
+				<h4><input readonly class="form control small mb-1 no-outline" type="text" id="pNumber" name="pNumber"></h4>
+              <p><em>Plate Number</em></p>
+			
+				
+				<h5><input readonly class="form control small mb-1 no-outline" type="text" id="fNumber"></h5>
+				<p><em>File Number</em></p>
+				
+				<h5><input readonly class="form control small mb-1 no-outline" type="text" id="eNumber"></h5>
+				<p><em>Engine Number</em></p>
+				
+				<h5><input readonly class="form control small mb-1 no-outline" type="text" id="cNumber"></h5>
+				<p><em>Chassis number:</em></p>
+				
+				
+				
+				
+            </div>
+            
+          </div>
+          
+        </div>
+						  
+                  </div>
+                                                       
+                                                        
+                                                       
+                                                       
+                                                       
                                                     </div>
                                                 </div>
 
@@ -234,9 +271,9 @@ $conn = OpenCon();
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" id="closeVscan" class="btn btn-secondary" data-dismiss="modal" style="display:none" onclick="scanVclose()">Close</button>
-                                            <button type="button" id="startVscan" class="btn btn-primary" style="display:none" onclick="rescanVehicle()">Scan QR</button>
-                                            <button type="button" id="manualInputOrcr" class="btn btn-primary" style="display:none" onclick="btnManualInputForm()">Manual input</button>
-                                            <button type="button" id="plateNumInput" class="btn btn-primary" style="display:none" onclick="btnConfirmPlate()">Confirm</button>
+                                            <button type="button" id="startVscan" class="btn btn-info" style="display:none" onclick="rescanVehicle()">Scan QR</button>
+                                            <button type="button" id="manualInputOrcr" class="btn btn-info" style="display:none" onclick="btnManualInputForm()">Manual input</button>
+                                            <button type="button" id="plateNumInput" class="btn btn-info" style="display:none" onclick="btnConfirmPlate()">Confirm</button>
                                         </div>
                                     </div>
                                 </div>
@@ -325,6 +362,7 @@ $conn = OpenCon();
                         document.getElementById("eNumber").value = result[0].engineNumber;
                         document.getElementById("fNumber").value = result[0].fileNumber;
                         document.getElementById("rOwner").value = result[0].registeredOwner;
+                       
 
 
 

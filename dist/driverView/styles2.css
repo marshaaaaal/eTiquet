@@ -12,3 +12,134 @@
     .item p{
 	margin-bottom:0.2em;
 }
+
+.form-layout {
+  position: relative;
+  z-index: 3;
+	margin-top: 10px
+}
+
+.form-layout .content {
+  background: #164172;
+  border-radius: 4px;
+  color: #fff;
+	
+}
+
+.form-layout .content h3 {
+  font-weight: 700;
+  font-size: 34px;
+}
+
+.form-layout .content p {
+}
+
+
+
+
+.form-layout .icon-boxes .icon-box {
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  padding: 40px 30px;
+  width: 100%;
+}
+
+.form-layout .icon-boxes .icon-box i {
+  font-size: 40px;
+  color: #ff5821;
+  margin-bottom: 30px;
+}
+
+.form-layout .icon-boxes .icon-box h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 30px 0;
+}
+
+.form-layout .icon-boxes .icon-box p {
+  font-size: 15px;
+  color: #716f6f;
+}
+
+/*--------------------------------------------------------------
+# Resume
+--------------------------------------------------------------*/
+.resume .resume-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #45505b;
+}
+
+.resume .resume-item {
+  padding: 0 0 20px 20px;
+  margin-top: -2px;
+  border-left: 2px solid #164172;
+  position: relative;
+}
+
+.resume .resume-item h4 {
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  color: #164172;
+	margin-bottom: 20px;
+	
+}
+
+.resume .resume-item p {
+	margin-top: -25px;
+	color: #716f6f;
+	
+}
+
+.resume .resume-item h5 {
+  font-size: 16px;
+  
+  display: inline-block;
+  font-weight: 600;
+  margin-bottom: 25px;
+
+}
+
+.resume .resume-item ul {
+  padding-left: 20px;
+}
+
+.resume .resume-item ul li {
+  padding-bottom: 10px;
+}
+
+.resume .resume-item:last-child {
+  padding-bottom: 0;
+}
+
+.resume .resume-item::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50px;
+  left: -9px;
+  top: 0;
+  background: #fff;
+  border: 2px solid #164172;
+	
+}
+
+.btn-more {
+	background: #164172;
+	color: #fff;
+	margin-top: 20px;
+	margin-bottom: 30px;
+
+	
+}
+
+.btn-more:hover{
+	background: #000;
+	color: #fff;
+}

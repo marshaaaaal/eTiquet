@@ -110,6 +110,10 @@ function vehicleInfo(plateNum) {
                 document.getElementById("txtRegisteredOwner").value = result[0].registeredOwner;
 
                 document.getElementById("btnmodalConfirm").disabled = false;
+                console.log(result[0].officialReceipt);
+                console.log(result[0].certificateRegistration);
+                document.getElementById("orPic").src = result[0].officialReceipt;
+                document.getElementById("crPic").src= result[0].certificateRegistration;
 
             }
         }
